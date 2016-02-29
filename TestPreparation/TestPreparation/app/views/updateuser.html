@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title><%= title %></title>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+
+    <!-- ============ Add custom CSS here ============ -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="../css/style.css" rel="stylesheet" type="text/css" />
+    <link href="../css/font-awesome.css" rel="stylesheet" type="text/css" />
+
+    <script>
+        $(document).ready(function () {
+            $("#submit").click(function () {
+                firstName = $("#firstName");
+                lastName = $("#lastName");
+                email = $("#email");
+                password = $("#password");
+
+                /*
+                * Perform some validation here.
+                */
+
+                //creating a user object
+                var user = {
+                    firstName: firstName.val(),
+                    lastName: lastName.val(),
+                    email: email.val(),
+                    password: password.val()
+                };
+
+
+
+                $.ajax({
+                    url: 'http://localhost:3000/api/users/' + email.val(),
+                    type: 'PUT',
+                    data: JSON.stringify(user),
+                    contentType: "application/json;charset=utf-8",
+                    success: function (data) {
+                        alert(data.message);
+                        window.location.href = "/users";
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 text-center">
+
+        </div>
+        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 container-top">
+            <div class="registrationform">
+                <div class="form-horizontal">
+                    <fieldset>
+                        <legend>Update User<i class="fa fa-refresh pull-right"></i></legend>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label"><a>* </a>First Name:</label>
+                            <div class="col-lg-9">
+                                <input type="text" size="30" placeholder="Enter your first name" id="firstName" name="firstName" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label"><a>* </a>Last Name:</label>
+                            <div class="col-lg-9">
+                                <input type="text" size="30" placeholder="Enter your last name" id="lastName" name="lastName" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label"><a>* </a>Email:</label>
+                            <div class="col-lg-9">
+                                <input type="text" size="30" placeholder="Enter your email" id="email" name="email" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label"><a>* </a>Password:</label>
+                            <div class="col-lg-9">
+                                <input type="password" size="30" placeholder="Enter your password" id="password" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-7 col-lg-offset-5">
+                                <input type="submit" id="submit" class="btn btn-primary" text="Submit" value="Update User" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-12 control-label"><a>* </a>Mandatory fields</label>
+
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-9 col-lg-offset-3" id="message" style="color:orange;">
+
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 text-center">
+
+        </div>
+    </div>
+    <script src="../js/jquery.js" type="text/javascript"></script>
+    <script src="../js/bootstrap.min.js" type="text/javascript"></script>
+</body>
+</html>
