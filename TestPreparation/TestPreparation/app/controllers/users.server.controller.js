@@ -14,15 +14,24 @@ exports.getAll = function (req, res) {
 
 // Create a new user
 exports.postUser = function (req, res) {
-    var user = new User(req.body);
+    var newUser = new User(req.body);
     
-    user.save(function (err) {
+    User.findOne({ email: newUser.email }, function (err, user) {
         if (err) {
             return res.send(err);
         }
-        
-        res.send({ message: 'User Added' });
-    });
+        if (user) {
+            return res.send({ message: '0' });
+        }
+        else {
+            newUser.save(function (err) {
+                if (err) {
+                    return res.send(err);
+                }
+                res.send({ message: '1' });
+            });
+        }
+    });    
 };
 
 //// Update the user by id

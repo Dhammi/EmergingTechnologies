@@ -41,8 +41,16 @@
                     data: JSON.stringify(user),
                     contentType: "application/json;charset=utf-8",
                     success: function (data) {
-                        alert("User Inserted Successfully");
-                        window.location.href = "/users";
+                        if (data.message==1)
+                        {
+                            alert("User added successfully");
+                            window.location.href = "/users";
+                        }
+                        else
+                        {
+                            alert("Email alreay exists");
+                        }
+                        
                     }
                 });
             });
